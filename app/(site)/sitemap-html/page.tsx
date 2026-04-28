@@ -10,7 +10,6 @@ const links = [
   { href: "/upload", label: "Upload" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-  { href: "/faqs", label: "FAQs" },
   { href: "/terms", label: "Terms" },
   { href: "/privacy", label: "Privacy" },
   { href: "/cookies", label: "Cookie" },

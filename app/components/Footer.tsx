@@ -37,20 +37,52 @@ export default function Footer() {
                   Contact
                 </a>
               </li>
-              <li>
-                <a className="hover:text-white" href="/faqs">
-                  FAQs
-                </a>
-              </li>
             </ul>
           </div>
 
           <div>
-            <h6 className="text-lg font-semibold text-gray-200">Tool Focus</h6>
+            <h6 className="text-lg font-semibold text-gray-200">More Tools</h6>
             <ul className="mt-3 space-y-2 text-base text-gray-300">
-              <li>Canthal tilt direction and angle</li>
-              <li>Primary eye-shape category</li>
-              <li>Appearance-based eye-color estimate</li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://skoy.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  SKOY
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://ai-calorie-counter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  AI Calorie Counter
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://bodyfatestimator.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Body Fat Estimator
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://heightestimatorai.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Height Estimator
+                </a>
+              </li>
             </ul>
           </div>
         </div>

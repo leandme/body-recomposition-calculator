@@ -127,9 +127,90 @@ const FAQ_ITEMS: FaqItem[] = [
       "Yes. The detector returns an estimated primary eye-shape category along with canthal tilt and dominant eye color.",
   },
   {
+    question: "What do positive, neutral, and negative canthal tilt mean?",
+    answer:
+      "Positive means the outer eye corner appears higher than the inner corner, neutral means they are close to level, and negative means the outer corner appears lower.",
+  },
+  {
+    question: "What does the confidence level mean?",
+    answer:
+      "Confidence reflects how clearly the model can detect stable eye-region cues in your photo. Better lighting, straight head position, and visible eyes usually increase confidence.",
+  },
+  {
+    question: "Why did I get an uncertain result?",
+    answer:
+      "Uncertain results usually happen when the eyes are partially blocked, blurred, closed, heavily filtered, or captured at a strong angle.",
+  },
+  {
+    question: "Why can results change between two photos of me?",
+    answer:
+      "Small differences in lighting, camera distance, head tilt, expression, and reflections can shift visual cues and produce different estimates.",
+  },
+  {
+    question: "Can I wear glasses or contact lenses?",
+    answer:
+      "Contact lenses are usually fine, but reflective glasses can hide key landmarks. For best results, use a photo without glare across the eye area.",
+  },
+  {
+    question: "Does makeup affect the scan?",
+    answer:
+      "Yes. Heavy eyeliner, lashes, and contouring can change visible lid and corner cues. If you want the most neutral estimate, use lighter makeup.",
+  },
+  {
+    question: "Can I use a side-profile or angled selfie?",
+    answer:
+      "A front-facing portrait works best. Side profiles and strong angles can distort corner alignment and reduce canthal tilt reliability.",
+  },
+  {
+    question: "Can this analyze multiple people in one photo?",
+    answer:
+      "No. Upload a photo with one clearly visible face to avoid ambiguity and improve detection quality.",
+  },
+  {
+    question: "Is this tool for adults only?",
+    answer:
+      "This tool is intended for general appearance analysis and not for pediatric, clinical, or diagnostic interpretation.",
+  },
+  {
+    question: "How do I compare results over time?",
+    answer:
+      "Use similar setup each time: same camera distance, lighting, head position, and expression. Consistent inputs create more comparable outputs.",
+  },
+  {
+    question: "What file quality should I upload?",
+    answer:
+      "Use a clear, high-resolution image where both eyes are sharp and unobstructed. Very low-resolution or heavily compressed images reduce reliability.",
+  },
+  {
     question: "Can I use this for medical diagnosis?",
     answer:
       "No. This is an appearance-based AI estimate only. It should not be used for medical or diagnostic decisions.",
+  },
+  {
+    question: "How This Canthal Tilt Test Works",
+    answer: (
+      <>
+        <p>
+          This tool estimates periorbital geometry from one portrait image: lid contour pattern,
+          apparent canthal tilt direction and angle, and dominant iris color category.
+        </p>
+        <p className="mt-3">
+          Results can change with lighting, pupil size, makeup, lens reflections, and camera
+          angle. Keep photo setup consistent if you compare multiple scans.
+        </p>
+      </>
+    ),
+  },
+  {
+    question: "How To Improve Scan Quality",
+    answer: (
+      <ul className="list-disc pl-6 space-y-1">
+        <li>Use a front-facing portrait with both eyes clearly visible.</li>
+        <li>Avoid tinted lenses, strong reflections, or heavy shadows on the eyes.</li>
+        <li>Use a neutral expression with natural eye opening.</li>
+        <li>Prefer daylight or balanced white light for eye-color detection.</li>
+      </ul>
+    ),
   },
 ];
 
@@ -543,34 +624,6 @@ export default function CanthalTiltTestTool() {
             </ul>
           </div>
         ) : null}
-
-        <div className={sectionWrap}>
-          <h2 className={h2Class}>How This Canthal Tilt Test Works</h2>
-          <p className={pClass}>
-            This tool estimates periorbital geometry from one portrait image: lid contour pattern,
-            apparent canthal tilt direction and angle, and dominant iris color category.
-          </p>
-          <p className={pClass}>
-            Results can change with lighting, pupil size, makeup, lens reflections, and camera
-            angle. Keep photo setup consistent if you compare multiple scans.
-          </p>
-        </div>
-
-        <div className={sectionWrap}>
-          <h2 className={h2Class}>How To Improve Scan Quality</h2>
-          <ul className="list-disc pl-6 space-y-2 text-lg">
-            {(analysis?.retakeTips?.length
-              ? analysis.retakeTips
-              : [
-                  "Use a front-facing portrait with both eyes clearly visible.",
-                  "Avoid tinted lenses, strong reflections, or heavy shadows on the eyes.",
-                  "Use a neutral expression with natural eye opening.",
-                  "Prefer daylight or balanced white light for eye-color detection.",
-                ]).map((tip, idx) => (
-              <li key={`${tip}-${idx}`}>{tip}</li>
-            ))}
-          </ul>
-        </div>
 
         <div className="hero pt-10 pb-10 lg:pt-20 lg:pb-20 flex items-center justify-center bg-base-100">
           <div className="hero-content w-full px-4">
