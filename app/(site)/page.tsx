@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
-import HeightEstimatorTool from "../components/HeightEstimatorTool";
+import CanthalTiltTestTool from "../components/CanthalTiltTestTool";
 
-const title = "Height Estimator AI – Estimate Height from Photo";
+const title = "Canthal Tilt Test - Eye Shape Detector";
 const description =
-  "Estimate apparent adult height from a full-body photo with confidence and range context using AI. 100% free online app.";
+  "Upload a clear portrait to run a canthal tilt test and detect eye shape and eye color with AI.";
 
 export const metadata: Metadata = {
-  title: title,
-  description: description,
+  title,
+  description,
 };
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
         </div>
       }
     >
-      <HeightEstimatorTool />
+      <CanthalTiltTestTool />
     </Suspense>
   );
 }

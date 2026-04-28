@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Security Policy - Height Estimator",
-  description: "Security practices and data-protection approach for Height Estimator.",
+  title: "Security Policy - Canthal Tilt Test",
+  description: "Security practices and data-protection approach for Canthal Tilt Test.",
 };
 
 export default function SecurityPage() {
@@ -10,15 +10,15 @@ export default function SecurityPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-6">Security Policy</h1>
       <p className="text-lg mb-4">
-        Protecting your data is important to us. This page outlines how Height Estimator approaches security and data
-        protection.
+        Protecting your data is important to us. This page outlines how Canthal Tilt Test approaches
+        security and data protection.
       </p>
 
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">Transport Security</h2>
         <p>
-          Traffic to and from Height Estimator is intended to be served over HTTPS using modern TLS standards provided
-          by our hosting infrastructure.
+          Traffic to and from Canthal Tilt Test is intended to be served over HTTPS using modern TLS
+          standards provided by our hosting infrastructure.
         </p>
       </section>
 
@@ -34,7 +34,8 @@ export default function SecurityPage() {
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">Responsible Use</h2>
         <p>
-          Users should secure their own devices and avoid sharing sensitive credentials or private data in uploads.
+          Users should secure their own devices and avoid sharing sensitive credentials or private
+          data in uploads.
         </p>
       </section>
 

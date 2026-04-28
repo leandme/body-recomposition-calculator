@@ -1,3 +1,3 @@
-import HeightEstimatorTool from "./HeightEstimatorTool";
+import CanthalTiltTestTool from "./CanthalTiltTestTool";
 
-export default HeightEstimatorTool;
+export default CanthalTiltTestTool;

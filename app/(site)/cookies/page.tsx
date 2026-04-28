@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy - Height Estimator",
-  description: "Cookie and similar technology usage for Height Estimator.",
+  title: "Cookie Policy - Canthal Tilt Test",
+  description: "Cookie and similar technology usage for Canthal Tilt Test.",
 };
 
 export default function CookiesPage() {
@@ -10,14 +10,14 @@ export default function CookiesPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-6">Cookie Policy</h1>
       <p className="text-lg mb-4">
-        This page describes how Height Estimator may use cookies and similar technologies.
+        This page describes how Canthal Tilt Test may use cookies and similar technologies.
       </p>
 
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">What Cookies Are</h2>
         <p>
-          Cookies are small text files stored on your device that help websites remember settings and understand usage
-          patterns.
+          Cookies are small text files stored on your device that help websites remember settings and
+          understand usage patterns.
         </p>
       </section>
 
@@ -33,8 +33,8 @@ export default function CookiesPage() {
       <section>
         <h2 className="text-2xl font-semibold mb-4">Your Choices</h2>
         <p>
-          You can manage or delete cookies through your browser settings. Disabling certain cookies may affect how the
-          site functions.
+          You can manage or delete cookies through your browser settings. Disabling certain cookies
+          may affect how the site functions.
         </p>
       </section>
     </div>

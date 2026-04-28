@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 const title = "About";
 const description =
-  "Learn what Height Estimator is, how photo-based height estimation works, its limitations, and how to use it responsibly.";
+  "Learn what Canthal Tilt Test does, how eye-shape analysis works, and how to interpret results responsibly.";
 
 export const metadata: Metadata = {
   title,
@@ -17,56 +17,55 @@ export default function AboutPage() {
 
         <div className="prose prose-invert max-w-3xl text-center lg:text-left">
           <p className="text-lg">
-            Height Estimator is a free visual tool designed to help people estimate apparent adult height from a
-            single full-body photo. The goal is simple: make visual height estimation more accessible, private, and
-            practical for everyday use.
+            Canthal Tilt Test is a free visual tool designed to estimate canthal tilt, eye shape,
+            and eye color from a single portrait photo.
           </p>
 
           <h2>Why this tool exists</h2>
           <p className="text-lg">
-            Many people want a quick height estimate from a photo without manual measurement setup or specialized
-            equipment. Height Estimator exists as a lightweight option for directional estimates and comparison across
-            similarly framed photos.
+            People often want a faster way to check eye-area traits for styling and self-comparison
+            without manual measurements. This tool gives a structured, repeatable estimate in seconds.
           </p>
 
-          <h2>How the estimate works (high level)</h2>
+          <h2>How the analysis works (high level)</h2>
           <p className="text-lg">
-            The estimator analyzes visual cues in your uploaded image such as body proportions, perspective, posture,
-            and scene context. It returns an estimated height, a plausible range, and a confidence level.
+            The model analyzes visible eye-region cues such as inner and outer eye-corner position,
+            lid contour, and iris appearance. It returns:
           </p>
-          <p className="text-lg">
-            Like all photo-based estimates, results depend on image quality, camera angle, distance, posture, and
-            visible scale cues.
-          </p>
+          <ul className="text-lg">
+            <li>Estimated canthal tilt category and angle</li>
+            <li>Estimated primary eye-shape category</li>
+            <li>Estimated dominant eye color with confidence context</li>
+          </ul>
 
           <h2>Accuracy and limitations</h2>
           <p className="text-lg">
-            Height Estimator provides a directional estimate, not an exact clinical measurement. It is most useful for
-            rough context and comparison when photo conditions are consistent.
+            This is an appearance-based estimate, not a medical or biometric instrument. Results can
+            shift based on lighting, head tilt, makeup, reflections, and photo quality.
           </p>
           <ul className="text-lg">
-            <li>Not intended for medical diagnosis or treatment decisions</li>
-            <li>Accuracy varies with image framing, camera perspective, and photo quality</li>
-            <li>Best used as a rough visual estimate, not a substitute for direct measurement</li>
+            <li>Not intended for medical diagnosis or treatment</li>
+            <li>Best used for directional interpretation and comparison</li>
+            <li>Use consistent photo setup when tracking changes over time</li>
           </ul>
 
           <h2>Privacy</h2>
           <p className="text-lg">
-            Privacy matters. Use photos you are comfortable uploading to a computer system. Review the Privacy Policy
-            for details on data handling.
+            Privacy matters. Upload only images you are comfortable processing through an AI service,
+            and review the Privacy Policy for data-handling details.
           </p>
 
           <h2>Who should use this tool</h2>
           <ul className="text-lg">
-            <li>People who want a quick photo-based height estimate</li>
-            <li>Users comparing multiple photos under similar conditions</li>
-            <li>Anyone looking for rough visual context before direct measurement</li>
+            <li>People who want a quick canthal tilt estimate from a portrait</li>
+            <li>Users comparing eye-shape scans across similar photos</li>
+            <li>Anyone seeking non-medical visual analysis for styling context</li>
           </ul>
 
           <h2>Who should not rely on this tool</h2>
           <ul className="text-lg">
-            <li>Anyone needing exact height for medical, legal, or official records</li>
-            <li>Individuals requiring high-precision biometric measurement</li>
+            <li>Anyone needing clinical or diagnostic assessment</li>
+            <li>Anyone requiring high-precision biometric measurements</li>
           </ul>
 
           <h2 id="founder">About the Founder</h2>
@@ -105,15 +104,14 @@ export default function AboutPage() {
                 </div>
               </div>
               <p className="text-gray-500 mt-1">
-                Independent product builder focused on practical fitness tools, height estimation, and visual progress
-                tracking.
+                Independent product builder focused on practical, user-friendly AI analysis tools.
               </p>
             </div>
           </div>
 
           <h2>Contact</h2>
           <p className="text-lg mb-12">
-            Have questions, feedback, or need assistance? You can reach us at{" "}
+            Have questions or feedback? Reach us at{" "}
             <a href="mailto:matt@leandme.com" className="text-primary">
               matt@leandme.com
             </a>

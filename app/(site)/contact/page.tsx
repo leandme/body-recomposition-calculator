@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
-const title = "Contact Height Estimator";
+const title = "Contact Canthal Tilt Test";
 const description =
-  "Contact Height Estimator support for help with photo-based height estimates, uploads, and general questions.";
+  "Contact Canthal Tilt Test support for help with uploads, canthal tilt results, and eye-shape analysis questions.";
 
 export const metadata: Metadata = {
   title,
@@ -14,8 +14,8 @@ export default function ContactPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-3xl">
       <h1 className="text-4xl font-bold mb-6">Contact</h1>
       <p className="text-lg mb-4">
-        Need help with your height estimate, upload issues, or interpretation questions? Reach out and we will help
-        you troubleshoot quickly.
+        Need help with your scan, upload flow, or interpretation? Reach out and we will help you
+        troubleshoot quickly.
       </p>
       <p className="text-lg mb-8">
         Email:{" "}
@@ -25,10 +25,10 @@ export default function ContactPage() {
       </p>
 
       <section className="space-y-3 text-base lg:text-lg">
-        <p>For the fastest support, include:</p>
+        <p>For fastest support, include:</p>
         <ul className="list-disc pl-6 space-y-1">
-          <li>What page you are on (Home, Upload, About, etc.)</li>
-          <li>What went wrong and what you expected</li>
+          <li>The page you were using</li>
+          <li>What happened and what you expected instead</li>
           <li>A screenshot if the issue is visual</li>
         </ul>
       </section>

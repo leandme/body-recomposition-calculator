@@ -1,13 +1,12 @@
-// src/app/(site)/sitemap.ts
-import { MetadataRoute } from 'next';
-import fs from 'fs';
-import path from 'path';
+import { MetadataRoute } from "next";
+import fs from "fs";
+import path from "path";
 
-const BASE_URL = 'https://heightestimatorai.com';
+const BASE_URL = "https://canthaltilttest.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pagesDirectory = path.join(process.cwd(), '/app/(site)');
-  let paths: string[] = [];
+  const pagesDirectory = path.join(process.cwd(), "/app/(site)");
+  const paths: string[] = [];
 
   function readPagesDirectory(directory: string) {
     fs.readdirSync(directory).forEach((file) => {
@@ -16,14 +15,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       if (stat.isDirectory()) {
         readPagesDirectory(absolutePath);
       } else {
-        // Only include .tsx files (or .js if you're not using TypeScript)
-        // and exclude API routes and any other files you don't want in the sitemap
-        if (absolutePath.endsWith('page.tsx') && !absolutePath.includes('/api/') && !absolutePath.includes('/layout/') && !absolutePath.includes('[...not-found]')) {
+        if (
+          absolutePath.endsWith("page.tsx") &&
+          !absolutePath.includes("/api/") &&
+          !absolutePath.includes("/layout/") &&
+          !absolutePath.includes("[...not-found]")
+        ) {
           const route = absolutePath
-            .replace(pagesDirectory, '')
-            .replace(/\\/g, '/')
-            .replace(/\/index\.tsx$/, '') // Remove /index.tsx
-            .replace(/\/page.tsx$/, ''); // Remove .tsx extension
+            .replace(pagesDirectory, "")
+            .replace(/\\/g, "/")
+            .replace(/\/index\.tsx$/, "")
+            .replace(/\/page.tsx$/, "");
           paths.push(`${BASE_URL}${route}`);
         }
       }
@@ -34,8 +36,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return paths.map((url) => ({
     url,
-    lastModified: new Date(), // You could make this more dynamic if needed
-    changeFrequency: 'daily', // Or your preferred default value
-    priority: 0.7, // Or your preferred default value
+    lastModified: new Date(),
+    changeFrequency: "daily",
+    priority: 0.7,
   }));
 }

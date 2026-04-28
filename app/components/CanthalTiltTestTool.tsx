@@ -1,0 +1,599 @@
+"use client";
+
+import { ReactNode, useMemo, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { trackEvent } from "@/app/libs/amplitude";
+import {
+  CanthalTiltKey,
+  EyeShapeKey,
+  useEyeShapeAnalysis,
+} from "@/app/hooks/useEyeShapeAnalysis";
+
+type FaqItem = {
+  question: string;
+  answer: ReactNode;
+};
+
+type EyeShapeRow = {
+  key: Exclude<EyeShapeKey, "uncertain">;
+  label: string;
+  colorClass: string;
+  textClass: string;
+  pattern: string;
+  direction: string;
+};
+
+const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+
+const FACE_EXAMPLES = [
+  { id: "eye-a", label: "Example A", src: "/tools/eye-shape-detector/eye-example.jpg" },
+  { id: "eye-b", label: "Example B", src: "/tools/eye-shape-detector/eye-example-2.jpg" },
+  { id: "eye-c", label: "Example C", src: "/tools/eye-shape-detector/eyes-example-3.jpg" },
+  { id: "eye-d", label: "Example D", src: "/tools/eye-shape-detector/eye-example-4.jpg" },
+];
+
+const EYE_SHAPE_ROWS: EyeShapeRow[] = [
+  {
+    key: "almond",
+    label: "Almond",
+    colorClass: "bg-green-50",
+    textClass: "text-green-800",
+    pattern: "Tapered outer corners with balanced vertical lid opening.",
+    direction: "Most eyeliner and lash directions work with minimal correction.",
+  },
+  {
+    key: "round",
+    label: "Round",
+    colorClass: "bg-blue-50",
+    textClass: "text-blue-800",
+    pattern: "Larger visible iris opening and more circular eye contour.",
+    direction: "Outer-corner extension can add horizontal balance.",
+  },
+  {
+    key: "hooded",
+    label: "Hooded",
+    colorClass: "bg-yellow-50",
+    textClass: "text-yellow-800",
+    pattern: "Upper lid fold sits lower over mobile lid area.",
+    direction: "Lift-focused crease placement and outer lift lines often work best.",
+  },
+  {
+    key: "monolid",
+    label: "Monolid",
+    colorClass: "bg-orange-50",
+    textClass: "text-orange-800",
+    pattern: "Minimal visible supratarsal crease with smooth lid plane.",
+    direction: "Gradient shadow and tightlining can define without crowding lid space.",
+  },
+  {
+    key: "upturned",
+    label: "Upturned",
+    colorClass: "bg-emerald-50",
+    textClass: "text-emerald-800",
+    pattern: "Outer corners sit slightly higher than inner corners.",
+    direction: "Balanced liner width helps keep lift without over-accentuating tilt.",
+  },
+  {
+    key: "downturned",
+    label: "Downturned",
+    colorClass: "bg-red-50",
+    textClass: "text-red-800",
+    pattern: "Outer corners sit lower than inner corners at rest.",
+    direction: "Lifted outer placement can visually neutralize downward tilt.",
+  },
+  {
+    key: "deep-set",
+    label: "Deep Set",
+    colorClass: "bg-violet-50",
+    textClass: "text-violet-800",
+    pattern: "Eyes sit visually deeper under brow bone projection.",
+    direction: "Reflective center-lid placement can bring forward eye presence.",
+  },
+  {
+    key: "protruding",
+    label: "Protruding",
+    colorClass: "bg-cyan-50",
+    textClass: "text-cyan-800",
+    pattern: "Eye globe appears more prominent relative to orbital contour.",
+    direction: "Softer matte contouring can add depth balance around lid perimeter.",
+  },
+];
+
+const FAQ_ITEMS: FaqItem[] = [
+  {
+    question: "What is canthal tilt?",
+    answer:
+      "Canthal tilt is the angle between the inner and outer eye corners. Positive tilt means the outer corner sits higher, neutral is close to level, and negative tilt means the outer corner sits lower.",
+  },
+  {
+    question: "How accurate is this canthal tilt test?",
+    answer:
+      "This is a visual estimate, not a clinical measurement. Accuracy depends on photo quality, lighting, head position, and whether both eyes are clearly visible.",
+  },
+  {
+    question: "What photo works best?",
+    answer: (
+      <ul className="list-disc pl-6 space-y-1">
+        <li>Front-facing portrait with both eyes clearly visible</li>
+        <li>Even lighting with minimal shadows and reflections</li>
+        <li>Neutral expression and natural eye opening</li>
+        <li>No heavy filters and minimal head tilt</li>
+      </ul>
+    ),
+  },
+  {
+    question: "Does this tool also detect eye shape?",
+    answer:
+      "Yes. The detector returns an estimated primary eye-shape category along with canthal tilt and dominant eye color.",
+  },
+  {
+    question: "Can I use this for medical diagnosis?",
+    answer:
+      "No. This is an appearance-based AI estimate only. It should not be used for medical or diagnostic decisions.",
+  },
+];
+
+function clamp(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function confidenceBadgeClass(confidence: "low" | "medium" | "high") {
+  if (confidence === "high") return "bg-green-100 text-green-800 border-green-200";
+  if (confidence === "low") return "bg-red-100 text-red-800 border-red-200";
+  return "bg-yellow-100 text-yellow-800 border-yellow-200";
+}
+
+function tiltColor(tilt: CanthalTiltKey) {
+  if (tilt === "positive") return "text-green-700";
+  if (tilt === "negative") return "text-red-700";
+  if (tilt === "neutral") return "text-blue-700";
+  return "text-gray-700";
+}
+
+function UploadBox() {
+  const [fileName, setFileName] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
+
+  const goToImage = (url: string, source: "upload" | "example") => {
+    router.push(`/?imageUrl=${encodeURIComponent(url)}&source=${source}`);
+  };
+
+  const handleFile = (file: File) => {
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      alert("File size exceeds 5MB. Please upload a smaller image.");
+      return;
+    }
+
+    setFileName(file.name);
+    const objectUrl = URL.createObjectURL(file);
+    goToImage(objectUrl, "upload");
+  };
+
+  return (
+    <div
+      className="flex flex-col items-center justify-center w-full max-w-lg p-6 border-2 border-dashed rounded-lg cursor-pointer border-gray-400 shadow-sm hover:shadow-md transition"
+      onClick={() => inputRef.current?.click()}
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={(e) => {
+        e.preventDefault();
+        const dropped = e.dataTransfer.files?.[0];
+        if (dropped) handleFile(dropped);
+      }}
+    >
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const selected = e.target.files?.[0];
+          if (selected) handleFile(selected);
+        }}
+      />
+
+      <button
+        type="button"
+        className="btn btn-lg btn-primary mt-10 mb-5 text-white transform transition-transform duration-200 hover:scale-105"
+      >
+        Upload Face Photo
+      </button>
+
+      <div className="text-center text-gray-600">
+        <p className="text-base mb-2">drop a photo here,</p>
+        <button
+          type="button"
+          className="text-xs mb-5 text-gray-600 hover:text-primary"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const url = window.prompt("Paste an image URL (must start with http:// or https://)");
+            if (!url) return;
+            const cleaned = url.trim();
+            if (!/^https?:\/\//i.test(cleaned)) {
+              alert("Please paste a valid URL starting with http:// or https://");
+              return;
+            }
+            goToImage(cleaned, "upload");
+          }}
+        >
+          or paste <span className="underline underline-offset-2">URL</span>
+        </button>
+      </div>
+
+      {fileName ? <p className="mt-4 text-sm text-primary font-semibold">Uploaded File: {fileName}</p> : null}
+    </div>
+  );
+}
+
+function TryExamples() {
+  const router = useRouter();
+
+  return (
+    <div className="w-full mt-10 mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="leading-tight font-bold text-base-content/70">
+          <span className="inline sm:block">No photo?</span>{" "}
+          <span className="inline sm:block">Try one of these:</span>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3 sm:justify-end">
+          {FACE_EXAMPLES.map((example) => (
+            <button
+              key={example.id}
+              type="button"
+              onClick={() => {
+                trackEvent("Try Canthal Tilt Test Example", { example: example.label });
+                router.push(`/?imageUrl=${encodeURIComponent(example.src)}&source=example`);
+              }}
+              className="group relative rounded-2xl p-[2px] bg-transparent"
+              aria-label={`Try ${example.label}`}
+            >
+              <div className="rounded-2xl bg-base-100 shadow-sm group-hover:shadow-md transition overflow-hidden">
+                <div className="relative h-12 w-12 md:h-14 md:w-14 overflow-hidden">
+                  <img
+                    src={example.src}
+                    alt={example.label}
+                    className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+                  />
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <p className="mt-4 text-xs text-base-content/60 leading-relaxed">
+        By uploading a photo, you agree to our <a className="link" href="/terms">Terms of Service</a>. To learn more about how Canthal Tilt Test handles your personal data, check our <a className="link" href="/privacy">Privacy Policy</a>.
+      </p>
+    </div>
+  );
+}
+
+function CanthalTiltBar({ angle }: { angle: number }) {
+  const bounded = clamp(angle, -15, 15);
+  const markerPct = ((bounded + 15) / 30) * 100;
+
+  return (
+    <div className="w-full overflow-hidden rounded-2xl border bg-white shadow-sm">
+      <div className="w-full px-6 pt-6 pb-5">
+        <div className="relative">
+          <div className="relative h-12 rounded-full overflow-hidden border border-black/10 bg-base-200 shadow-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_6px_18px_rgba(0,0,0,0.16)]">
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(to right, #ef4444 0%, #fde047 50%, #22c55e 100%)",
+              }}
+            />
+            <div className="absolute inset-0 bg-white/15" />
+          </div>
+
+          <div
+            className="absolute -top-3"
+            style={{ left: `${markerPct}%`, transform: "translateX(-50%)" }}
+            aria-label="Canthal tilt marker"
+            title={`Canthal tilt ${bounded.toFixed(1)} degrees`}
+          >
+            <div
+              style={{
+                width: 0,
+                height: 0,
+                borderLeft: "10px solid transparent",
+                borderRight: "10px solid transparent",
+                borderTop: "14px solid #111827",
+                filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.25))",
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="mt-4 flex justify-between text-[11px] text-gray-600">
+          {[-15, -10, -5, 0, 5, 10, 15].map((value) => (
+            <span key={value} className="tabular-nums">
+              {value}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-2 flex justify-between text-[11px] text-gray-500">
+          <span>Negative</span>
+          <span>Neutral</span>
+          <span>Positive</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EyeShapeTable({ activeShape }: { activeShape: EyeShapeKey | null }) {
+  return (
+    <div className="mt-8 overflow-hidden rounded-2xl border bg-base-100">
+      <table className="w-full text-left border-separate border-spacing-0">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-4 py-3 text-sm font-semibold text-gray-700 border-r border-gray-200">
+              Eye Shape
+            </th>
+            <th className="px-4 py-3 text-sm font-semibold text-gray-700 border-r border-gray-200">
+              Visual Pattern
+            </th>
+            <th className="px-4 py-3 text-sm font-semibold text-gray-700 hidden sm:table-cell">
+              Styling Direction
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {EYE_SHAPE_ROWS.map((row) => {
+            const isActive = activeShape === row.key;
+            const cellBase = "px-4 py-4 align-top";
+            const activeCell = isActive ? "border-y-4 border-gray-900" : "border-y border-transparent";
+
+            return (
+              <tr key={row.key} className={row.colorClass}>
+                <td
+                  className={[
+                    cellBase,
+                    activeCell,
+                    isActive ? "border-l-4 border-gray-900 rounded-l-xl" : "",
+                  ].join(" ")}
+                >
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className={`font-semibold ${row.textClass}`}>{row.label}</span>
+                    {isActive ? (
+                      <span className="inline-flex rounded-full border border-gray-900/20 bg-gray-900/10 px-2 py-0.5 text-xs font-semibold text-gray-900">
+                        Your Result
+                      </span>
+                    ) : null}
+                  </div>
+                </td>
+                <td className={[cellBase, activeCell].join(" ")}>
+                  <p className="text-gray-700">{row.pattern}</p>
+                  <p className="mt-1 text-sm text-gray-700 sm:hidden">{row.direction}</p>
+                </td>
+                <td
+                  className={[
+                    cellBase,
+                    activeCell,
+                    "hidden sm:table-cell text-gray-700",
+                    isActive ? "border-r-4 border-gray-900 rounded-r-xl" : "",
+                  ].join(" ")}
+                >
+                  {row.direction}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default function CanthalTiltTestTool() {
+  const searchParams = useSearchParams();
+  const imageUrl = searchParams.get("imageUrl");
+  const source = searchParams.get("source") === "example" ? "example" : "upload";
+  const { analysis, loading, error } = useEyeShapeAnalysis(imageUrl, { source });
+
+  const activeShape = analysis?.shape ?? null;
+  const alternativesText = useMemo(() => {
+    if (!analysis?.alternatives?.length) return null;
+    return analysis.alternatives.slice(0, 2).join(" or ");
+  }, [analysis?.alternatives]);
+
+  const sectionWrap = "w-full max-w-3xl mx-auto space-y-6 text-gray-900 pt-10 pb-10 lg:pt-20 lg:pb-20 leading-relaxed";
+  const h2Class = "text-3xl lg:text-4xl font-semibold text-center";
+  const pClass = "text-lg leading-relaxed";
+
+  return (
+    <main className="bg-base-100">
+      <section className="flex flex-col items-center justify-start pt-10 px-6">
+        <h1 className="text-4xl lg:text-5xl font-bold text-center">Canthal Tilt Test</h1>
+        <p className="mt-4 text-center text-lg text-gray-700 max-w-2xl mx-auto">
+          Upload a clear portrait to run an AI canthal tilt test and detect eye shape and eye color.
+        </p>
+
+        {!imageUrl ? (
+          <div className="w-full max-w-2xl mt-10 flex flex-col items-center">
+            <div className="w-full max-w-md">
+              <UploadBox />
+            </div>
+            <div className="w-full max-w-lg mt-6 lg:max-w-xl">
+              <TryExamples />
+            </div>
+            <p className="mt-5 text-sm text-gray-600 max-w-md text-center">
+              Use a front-facing image with open eyes, even light, and minimal reflections on the iris.
+            </p>
+          </div>
+        ) : (
+          <div className="w-full max-w-5xl mt-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-8 lg:gap-16 items-start">
+              <div className="w-full sm:max-w-sm lg:max-w-none justify-self-center">
+                <img
+                  src={imageUrl}
+                  alt="Uploaded image for canthal tilt test"
+                  className="w-full max-w-[95vw] sm:max-w-sm lg:w-[360px] mx-auto rounded-2xl shadow-xl object-cover aspect-[3/4] bg-base-200"
+                />
+              </div>
+
+              <div className="w-full rounded-2xl border bg-white p-6 lg:p-8 shadow-sm">
+                <h2 className="text-2xl lg:text-3xl font-semibold text-gray-900">Eye Analysis Result</h2>
+
+                {loading ? (
+                  <p className="mt-4 text-lg text-gray-700">
+                    Analyzing eye contours, canthal tilt direction, and iris color profile...
+                  </p>
+                ) : null}
+
+                {error ? (
+                  <div className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4">
+                    <p className="whitespace-pre-line text-red-700">{error}</p>
+                  </div>
+                ) : null}
+
+                {!loading && !error && analysis ? (
+                  <div className="mt-5">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <p className="text-4xl lg:text-5xl font-bold text-primary">{analysis.shapeLabel}</p>
+                      <span
+                        className={`inline-flex rounded-full border px-3 py-1 text-sm font-semibold ${confidenceBadgeClass(
+                          analysis.confidence
+                        )}`}
+                      >
+                        {analysis.confidence.toUpperCase()} confidence
+                      </span>
+                    </div>
+
+                    <p className="mt-3 text-lg text-gray-700">
+                      Eye color: <span className="font-semibold">{analysis.eyeColorLabel}</span> (
+                      <span className="font-semibold">{analysis.eyeColorConfidence}/100</span>)
+                    </p>
+
+                    <p className="mt-2 text-lg text-gray-700">
+                      Canthal tilt: <span className={`font-semibold ${tiltColor(analysis.canthalTilt)}`}>{analysis.canthalTiltLabel}</span>
+                      {analysis.canthalTiltAngle != null ? (
+                        <>
+                          {" "}(
+                          <span className="font-semibold">{analysis.canthalTiltAngle.toFixed(1)}°</span>)
+                        </>
+                      ) : null}
+                    </p>
+
+                    {analysis.rationale ? <p className="mt-5 text-gray-700 leading-relaxed">{analysis.rationale}</p> : null}
+
+                    {alternativesText ? (
+                      <p className="mt-3 text-sm text-gray-600">
+                        Close alternatives: <span className="font-semibold text-gray-800">{alternativesText}</span>
+                      </p>
+                    ) : null}
+
+                    {analysis.secondaryTones.length ? (
+                      <p className="mt-2 text-sm text-gray-600">
+                        Secondary eye-color tones:{" "}
+                        <span className="font-semibold text-gray-800">{analysis.secondaryTones.join(", ")}</span>
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <section className="px-6">
+        {analysis?.canthalTiltAngle != null ? (
+          <div className="w-full max-w-3xl mx-auto pt-10 pb-10 lg:pt-20 lg:pb-20">
+            <h2 className={h2Class}>Canthal Tilt Interpretation</h2>
+            <p className="mt-4 text-center text-lg text-gray-700">
+              Marker shows estimated canthal tilt angle from negative to positive range.
+            </p>
+            <div className="mt-8">
+              <CanthalTiltBar angle={analysis.canthalTiltAngle} />
+            </div>
+          </div>
+        ) : null}
+
+        <div className="w-full max-w-3xl mx-auto pt-10 pb-10 lg:pt-20 lg:pb-20">
+          <h2 className={h2Class}>Where Your Eye Shape Fits</h2>
+          <p className="mt-4 text-center text-lg text-gray-700">
+            The highlighted row shows the detected primary eye-shape category.
+          </p>
+          <EyeShapeTable activeShape={activeShape} />
+        </div>
+
+        {analysis?.observationNotes?.length ? (
+          <div className={sectionWrap}>
+            <h2 className={h2Class}>Key Observation Notes</h2>
+            <ul className="list-disc pl-6 space-y-2 text-lg">
+              {analysis.observationNotes.map((note, idx) => (
+                <li key={`${note}-${idx}`}>{note}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        {analysis?.styleSuggestions?.length ? (
+          <div className={sectionWrap}>
+            <h2 className={h2Class}>Style Suggestions</h2>
+            <ul className="list-disc pl-6 space-y-2 text-lg">
+              {analysis.styleSuggestions.map((tip, idx) => (
+                <li key={`${tip}-${idx}`}>{tip}</li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        <div className={sectionWrap}>
+          <h2 className={h2Class}>How This Canthal Tilt Test Works</h2>
+          <p className={pClass}>
+            This tool estimates periorbital geometry from one portrait image: lid contour pattern,
+            apparent canthal tilt direction and angle, and dominant iris color category.
+          </p>
+          <p className={pClass}>
+            Results can change with lighting, pupil size, makeup, lens reflections, and camera
+            angle. Keep photo setup consistent if you compare multiple scans.
+          </p>
+        </div>
+
+        <div className={sectionWrap}>
+          <h2 className={h2Class}>How To Improve Scan Quality</h2>
+          <ul className="list-disc pl-6 space-y-2 text-lg">
+            {(analysis?.retakeTips?.length
+              ? analysis.retakeTips
+              : [
+                  "Use a front-facing portrait with both eyes clearly visible.",
+                  "Avoid tinted lenses, strong reflections, or heavy shadows on the eyes.",
+                  "Use a neutral expression with natural eye opening.",
+                  "Prefer daylight or balanced white light for eye-color detection.",
+                ]).map((tip, idx) => (
+              <li key={`${tip}-${idx}`}>{tip}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="hero pt-10 pb-10 lg:pt-20 lg:pb-20 flex items-center justify-center bg-base-100">
+          <div className="hero-content w-full px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl lg:text-4xl font-bold text-center">Canthal Tilt Test FAQs</h2>
+              <p className="py-6 text-lg mb-6 text-center">
+                Common questions about canthal tilt analysis, eye-shape detection, and result interpretation.
+              </p>
+              <div className="space-y-4">
+                {FAQ_ITEMS.map((item, idx) => (
+                  <div key={`${item.question}-${idx}`} className="collapse collapse-plus border bg-base-500 rounded-lg">
+                    <input type="radio" name="canthal-tilt-faq-accordion" />
+                    <div className="collapse-title text-lg lg:text-xl">{item.question}</div>
+                    <div className="collapse-content">
+                      <div className="text-lg text-gray-700 leading-relaxed">{item.answer}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

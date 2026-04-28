@@ -7,17 +7,17 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <img
                 src="/favicon.ico"
-                alt="Height Estimator Logo"
+                alt="Canthal Tilt Test Logo"
                 width={32}
                 height={32}
                 className="w-8 h-8 shrink-0 object-contain"
                 loading="eager"
               />
-              <span className="text-lg font-semibold">Height Estimator</span>
+              <span className="text-lg font-semibold">Canthal Tilt Test</span>
             </div>
           </a>
           <p className="mt-3 text-base text-gray-300 leading-relaxed">
-            Estimate apparent adult height from a full-body photo with confidence and range context.
+            AI-powered canthal tilt testing and eye-shape detection from portrait photos.
           </p>
         </div>
 
@@ -46,38 +46,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <h6 className="text-lg font-semibold text-gray-200">More Tools</h6>
+            <h6 className="text-lg font-semibold text-gray-200">Tool Focus</h6>
             <ul className="mt-3 space-y-2 text-base text-gray-300">
-              <li>
-                <a
-                  className="hover:text-white"
-                  href="https://bodyfatestimator.ai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Body Fat Estimator
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-white"
-                  href="https://ai-calorie-counter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  AI Calorie Counter
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-white"
-                  href="https://skoy.ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  SKOY
-                </a>
-              </li>
+              <li>Canthal tilt direction and angle</li>
+              <li>Primary eye-shape category</li>
+              <li>Appearance-based eye-color estimate</li>
             </ul>
           </div>
         </div>
