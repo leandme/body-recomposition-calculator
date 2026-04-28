@@ -46,21 +46,11 @@ export default function Footer() {
               <li>
                 <a
                   className="hover:text-white"
-                  href="https://skoy.ai"
+                  href="https://heightestimatorai.com"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  SKOY
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-white"
-                  href="https://ai-calorie-counter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  AI Calorie Counter
+                  Height Estimator
                 </a>
               </li>
               <li>
@@ -76,11 +66,51 @@ export default function Footer() {
               <li>
                 <a
                   className="hover:text-white"
-                  href="https://heightestimatorai.com"
+                  href="https://bodyfatestimator.ai/jawline-check"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Height Estimator
+                  Jawline Check
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://skoy.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Skoy
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://ai-calorie-counter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  AI Calorie Counter
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://bodyfatestimator.ai/body-shape-analyzer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Body Shape Analyzer
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-white"
+                  href="https://bodyvisualizer.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Body Visualizer
                 </a>
               </li>
             </ul>
