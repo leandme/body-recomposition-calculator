@@ -23,6 +23,14 @@ type EyeShapeRow = {
   direction: string;
 };
 
+type EyeShapeVisual = {
+  id: string;
+  title: string;
+  src: string;
+  description: string;
+  shapeKey?: EyeShapeRow["key"];
+};
+
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
 const FACE_EXAMPLES = [
@@ -96,6 +104,79 @@ const EYE_SHAPE_ROWS: EyeShapeRow[] = [
     textClass: "text-cyan-800",
     pattern: "Eye globe appears more prominent relative to orbital contour.",
     direction: "Softer matte contouring can add depth balance around lid perimeter.",
+  },
+];
+
+const EYE_SHAPE_VISUALS: EyeShapeVisual[] = [
+  {
+    id: "almond",
+    title: "Almond Eyes",
+    src: "/tools/eye-shape-detector/almond-eyes.png",
+    description:
+      "Almond eyes have a slightly pointed outer corner and a visible crease. They are wider than they are tall, creating a naturally balanced look. This versatile shape works well with soft blends, bold liner, and subtle outer-corner lift.",
+    shapeKey: "almond",
+  },
+  {
+    id: "round",
+    title: "Round Eyes",
+    src: "/tools/eye-shape-detector/round-eyes.png",
+    description:
+      "Round eyes look open and circular, often with more visible white around the iris. They create a bright, youthful expression. Winged liner or smoky outer shading can add definition and gentle elongation.",
+    shapeKey: "round",
+  },
+  {
+    id: "hooded",
+    title: "Hooded Eyes",
+    src: "/tools/eye-shape-detector/hooded-eyes.png",
+    description:
+      "Hooded eyes have a lower-set upper fold that can partially cover the mobile lid and soften crease visibility. Lifted outer placement and controlled liner thickness usually work best. Blended, upward shadow placement helps keep the look open.",
+    shapeKey: "hooded",
+  },
+  {
+    id: "upturned",
+    title: "Upturned Eyes",
+    src: "/tools/eye-shape-detector/upturned%20eyes.png",
+    description:
+      "Upturned eyes have outer corners that sit higher than inner corners, giving a naturally lifted effect. This shape already carries cat-eye energy. Soft smoky blending or balanced liner width helps enhance lift without over-accentuating tilt.",
+    shapeKey: "upturned",
+  },
+  {
+    id: "downturned",
+    title: "Downturned Eyes",
+    src: "/tools/eye-shape-detector/downturned-eyes.png",
+    description:
+      "Downturned eyes have outer corners that sit lower than inner corners, creating a softer, gentler expression. Lifted outer-corner liner and upward shading can visually rebalance the tilt. Curled lashes and mascara also help open the eye area.",
+    shapeKey: "downturned",
+  },
+  {
+    id: "deep-set",
+    title: "Deep-Set Eyes",
+    src: "/tools/eye-shape-detector/deep-set-eyes.png",
+    description:
+      "Deep-set eyes sit farther under the brow bone, often creating natural crease depth and shadow. Light-reflective center-lid shades and soft blending can bring the eyes forward. Avoiding very heavy crease darkness helps maintain brightness.",
+    shapeKey: "deep-set",
+  },
+  {
+    id: "protruding",
+    title: "Protruding Eyes",
+    src: "/tools/eye-shape-detector/protruding-eyes.png",
+    description:
+      "Protruding eyes appear more forward relative to the orbital contour and often look expressive. Soft matte contouring and deeper outer-corner tones can add balance. Smudged liner and blended shadows help keep definition smooth, not harsh.",
+    shapeKey: "protruding",
+  },
+  {
+    id: "close-set",
+    title: "Close-Set Eyes",
+    src: "/tools/eye-shape-detector/close-set-eyes.png",
+    description:
+      "Close-set eyes have less space between inner corners. Brightening the inner corners and extending shadow outward can create the illusion of more distance. Winged or elongated liner styles usually enhance horizontal balance.",
+  },
+  {
+    id: "wide-set",
+    title: "Wide-Set Eyes",
+    src: "/tools/eye-shape-detector/wide-set-eyes.png",
+    description:
+      "Wide-set eyes have more space between inner corners and can look fresh and open. Deeper inner-corner shading and defined liner can visually bring the eyes closer together. This shape also supports bold shadow looks while maintaining symmetry.",
   },
 ];
 
@@ -601,6 +682,47 @@ export default function CanthalTiltTestTool() {
             The highlighted row shows the detected primary eye-shape category.
           </p>
           <EyeShapeTable activeShape={activeShape} />
+        </div>
+
+        <div className="w-full max-w-3xl mx-auto pt-10 pb-10 lg:pt-20 lg:pb-20">
+          <h2 className={h2Class}>Common Eye Shapes</h2>
+          <p className="mt-4 text-center text-lg text-gray-700">
+            Quick visual examples of common eye-shape patterns.
+          </p>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {EYE_SHAPE_VISUALS.map((visual) => {
+              const isActive = visual.shapeKey != null && activeShape === visual.shapeKey;
+              return (
+                <article
+                  key={visual.id}
+                  className={[
+                    "overflow-hidden rounded-2xl border bg-white shadow-sm",
+                    isActive ? "ring-2 ring-gray-900 border-gray-900/40" : "border-gray-200",
+                  ].join(" ")}
+                >
+                  <div className="aspect-[3/2] bg-base-200">
+                    <img
+                      src={visual.src}
+                      alt={`${visual.title} example`}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-xl lg:text-2xl font-semibold text-gray-900">{visual.title}</h4>
+                      {isActive ? (
+                        <span className="inline-flex rounded-full border border-gray-900/20 bg-gray-900/10 px-3 py-1 text-sm font-semibold text-gray-900">
+                          Your Result
+                        </span>
+                      ) : null}
+                    </div>
+                    <p className="mt-3 text-lg text-gray-700 leading-relaxed">{visual.description}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
 
         {analysis?.observationNotes?.length ? (
