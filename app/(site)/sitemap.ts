@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import fs from "fs";
 import path from "path";
 
-const BASE_URL = "https://canthaltilttest.com";
+const BASE_URL = "https://bulkingcaloriecalculator.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pagesDirectory = path.join(process.cwd(), "/app/(site)");

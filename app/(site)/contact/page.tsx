@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
-const title = "Contact Canthal Tilt Test";
+const title = "Contact Bulking Calorie Calculator";
 const description =
-  "Contact Canthal Tilt Test support for help with uploads, canthal tilt results, and eye-shape analysis questions.";
+  "Contact Bulking Calorie Calculator support for help with calorie targets, activity settings, and bulking guidance.";
 
 export const metadata: Metadata = {
   title,
@@ -14,7 +14,7 @@ export default function ContactPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-3xl">
       <h1 className="text-4xl font-bold mb-6">Contact</h1>
       <p className="text-lg mb-4">
-        Need help with your scan, upload flow, or interpretation? Reach out and we will help you
+        Need help with your bulking setup or daily calorie target? Reach out and we will help you
         troubleshoot quickly.
       </p>
       <p className="text-lg mb-8">
@@ -27,8 +27,8 @@ export default function ContactPage() {
       <section className="space-y-3 text-base lg:text-lg">
         <p>For fastest support, include:</p>
         <ul className="list-disc pl-6 space-y-1">
-          <li>The page you were using</li>
-          <li>What happened and what you expected instead</li>
+          <li>Your age, height, weight, and activity setup</li>
+          <li>The calorie result you expected vs what you got</li>
           <li>A screenshot if the issue is visual</li>
         </ul>
       </section>

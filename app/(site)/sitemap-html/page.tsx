@@ -1,13 +1,12 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sitemap - Canthal Tilt Test",
-  description: "HTML sitemap for Canthal Tilt Test.",
+  title: "Sitemap - Bulking Calorie Calculator",
+  description: "HTML sitemap for Bulking Calorie Calculator.",
 };
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/upload", label: "Upload" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/terms", label: "Terms" },

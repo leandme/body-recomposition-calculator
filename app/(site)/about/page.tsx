@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 const title = "About";
 const description =
-  "Learn what Canthal Tilt Test does, how eye-shape analysis works, and how to interpret results responsibly.";
+  "Learn what Bulking Calorie Calculator does, how calorie targets are estimated, and how to use results responsibly.";
 
 export const metadata: Metadata = {
   title,
@@ -17,55 +17,49 @@ export default function AboutPage() {
 
         <div className="prose prose-invert max-w-3xl text-center lg:text-left">
           <p className="text-lg">
-            Canthal Tilt Test is a free visual tool designed to estimate canthal tilt, eye shape,
-            and eye color from a single portrait photo.
+            Bulking Calorie Calculator is a free tool designed to estimate a realistic daily calorie
+            target for muscle gain.
           </p>
 
           <h2>Why this tool exists</h2>
           <p className="text-lg">
-            People often want a faster way to check eye-area traits for styling and self-comparison
-            without manual measurements. This tool gives a structured, repeatable estimate in seconds.
+            Most people bulk either too aggressively or too conservatively. This calculator gives a
+            practical starting point based on your maintenance calories and chosen surplus pace.
           </p>
 
-          <h2>How the analysis works (high level)</h2>
+          <h2>How the estimate works (high level)</h2>
           <p className="text-lg">
-            The model analyzes visible eye-region cues such as inner and outer eye-corner position,
-            lid contour, and iris appearance. It returns:
+            The calculator uses your age, sex, height, weight, and activity level to estimate BMR
+            and maintenance calories. It then applies your selected bulking surplus to generate:
           </p>
           <ul className="text-lg">
-            <li>Estimated canthal tilt category and angle</li>
-            <li>Estimated primary eye-shape category</li>
-            <li>Estimated dominant eye color with confidence context</li>
+            <li>Daily bulking calorie target</li>
+            <li>Estimated daily surplus over maintenance</li>
+            <li>Suggested starting macro split (protein, carbs, fats)</li>
           </ul>
 
           <h2>Accuracy and limitations</h2>
           <p className="text-lg">
-            This is an appearance-based estimate, not a medical or biometric instrument. Results can
-            shift based on lighting, head tilt, makeup, reflections, and photo quality.
+            This is a planning estimate, not a guarantee. Real-world calorie needs vary by
+            non-exercise activity, training volume, sleep, stress, and tracking consistency.
           </p>
           <ul className="text-lg">
-            <li>Not intended for medical diagnosis or treatment</li>
-            <li>Best used for directional interpretation and comparison</li>
-            <li>Use consistent photo setup when tracking changes over time</li>
+            <li>Use weekly body-weight trends, not single-day scale readings</li>
+            <li>Adjust by 100-150 kcal if gain rate is too fast or too slow</li>
+            <li>Treat this as a starting point, then personalize from data</li>
           </ul>
-
-          <h2>Privacy</h2>
-          <p className="text-lg">
-            Privacy matters. Upload only images you are comfortable processing through an AI service,
-            and review the Privacy Policy for data-handling details.
-          </p>
 
           <h2>Who should use this tool</h2>
           <ul className="text-lg">
-            <li>People who want a quick canthal tilt estimate from a portrait</li>
-            <li>Users comparing eye-shape scans across similar photos</li>
-            <li>Anyone seeking non-medical visual analysis for styling context</li>
+            <li>Lifters starting a lean or moderate bulk</li>
+            <li>People transitioning from maintenance to a gaining phase</li>
+            <li>Anyone wanting a structured calorie target before meal planning</li>
           </ul>
 
-          <h2>Who should not rely on this tool</h2>
+          <h2>Who should not rely on this tool alone</h2>
           <ul className="text-lg">
-            <li>Anyone needing clinical or diagnostic assessment</li>
-            <li>Anyone requiring high-precision biometric measurements</li>
+            <li>People needing medical nutrition therapy</li>
+            <li>Anyone with a condition requiring clinician-supervised intake planning</li>
           </ul>
 
           <h2 id="founder">About the Founder</h2>
@@ -104,7 +98,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <p className="text-gray-500 mt-1">
-                Independent product builder focused on practical, user-friendly AI analysis tools.
+                Independent product builder focused on practical fitness and nutrition tools.
               </p>
             </div>
           </div>
@@ -117,7 +111,7 @@ export default function AboutPage() {
             <a href="https://jawlinecheck.com" className="text-primary">Jawline Check</a><br />
             <a href="https://heightestimatorai.com" className="text-primary">Height Estimator</a><br />
             <a href="https://bodyshapeanalyzer.com" className="text-primary">Body Shape Visualizer</a><br />
-            <a href="https://canthaltilttest.com" className="text-primary">Canthal Tilt Test</a><br />
+            <a href="https://bulkingcaloriecalculator.com" className="text-primary">Bulking Calorie Calculator</a><br />
             <a href="https://bodyvisualizer.ai" className="text-primary">Body Visualizer</a>
           </p>
 

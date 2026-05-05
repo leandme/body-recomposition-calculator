@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
-import CanthalTiltTestTool from "../components/CanthalTiltTestTool";
+import BulkingCalorieCalculatorTool from "../components/BulkingCalorieCalculatorTool";
 
-const title = "Canthal Tilt Test - Eye Shape Detector";
+const title = "Bulking Calorie Calculator";
 const description =
-  "Upload a clear portrait to run a canthal tilt test and detect eye shape and eye color with AI.";
+  "Estimate your bulking calories using BMR, activity level, and surplus target, with macro guidance for lean or aggressive gaining phases.";
 
 export const metadata: Metadata = {
   title,
@@ -20,7 +20,7 @@ export default function Home() {
         </div>
       }
     >
-      <CanthalTiltTestTool />
+      <BulkingCalorieCalculatorTool />
     </Suspense>
   );
 }

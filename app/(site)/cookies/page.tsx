@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy - Canthal Tilt Test",
-  description: "Cookie and similar technology usage for Canthal Tilt Test.",
+  title: "Cookie Policy - Bulking Calorie Calculator",
+  description: "Cookie and similar technology usage for Bulking Calorie Calculator.",
 };
 
 export default function CookiesPage() {
@@ -10,21 +10,22 @@ export default function CookiesPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-6">Cookie Policy</h1>
       <p className="text-lg mb-4">
-        This page describes how Canthal Tilt Test may use cookies and similar technologies.
+        This page describes how Bulking Calorie Calculator may use cookies and similar
+        technologies.
       </p>
 
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">What Cookies Are</h2>
         <p>
-          Cookies are small text files stored on your device that help websites remember settings and
-          understand usage patterns.
+          Cookies are small text files stored on your device that help websites remember settings
+          and understand usage patterns.
         </p>
       </section>
 
       <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">How We Use Cookies</h2>
         <ul className="list-disc pl-6 space-y-1">
-          <li>Core functionality and session behavior.</li>
+          <li>Core calculator functionality and session behavior.</li>
           <li>Performance and analytics (where enabled).</li>
           <li>Security and abuse prevention controls.</li>
         </ul>

@@ -1,3 +1,3 @@
-import CanthalTiltTestTool from "./CanthalTiltTestTool";
+import BulkingCalorieCalculatorTool from "./BulkingCalorieCalculatorTool";
 
-export default CanthalTiltTestTool;
+export default BulkingCalorieCalculatorTool;

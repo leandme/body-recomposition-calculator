@@ -5,68 +5,39 @@ type FaqItem = {
 
 const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "How does the canthal tilt test work?",
+    question: "How does this bulking calorie calculator work?",
     answer:
-      "Upload a clear front-facing portrait and the model estimates canthal tilt, eye shape, and eye color from visible eye-region cues.",
+      "It estimates BMR from your body stats, applies an activity multiplier for maintenance, then adds your chosen surplus to produce a bulking target.",
   },
   {
-    question: "How long does it take?",
-    answer: "Most scans complete in under 20 seconds.",
+    question: "How accurate is the result?",
+    answer:
+      "It is a strong starting estimate, not a guarantee. Real-world needs vary based on training volume, NEAT, sleep, and tracking consistency.",
   },
   {
-    question: "What do positive, neutral, and negative canthal tilt mean?",
+    question: "How much surplus should I use?",
     answer:
-      "Positive means the outer corner appears higher than the inner corner, neutral means they are close to level, and negative means the outer corner appears lower.",
+      "Most lifters do well with 5-10% above maintenance. Use 5% for leaner gains, 10% for faster progress, and 15% only if you tolerate faster fat gain.",
   },
   {
-    question: "How accurate is this tool?",
+    question: "How fast should body weight increase while bulking?",
     answer:
-      "It is an appearance-based estimate, not a clinical measurement. Accuracy improves with clear, front-facing photos and stable lighting.",
+      "A common target is roughly 0.25-0.5% of body weight per week. Beginners can often push slightly faster than advanced lifters.",
   },
   {
-    question: "What does confidence mean?",
+    question: "When should I adjust calories?",
     answer:
-      "Confidence indicates how clearly the model can detect eye landmarks in your photo. Better image quality and visible eyes generally improve confidence.",
+      "Check your 2-3 week trend. If weight is rising too slowly, add 100-150 kcal/day. If it is rising too fast, reduce by 100-150 kcal/day.",
   },
   {
-    question: "Why did I get an uncertain result?",
+    question: "How should I use the macro split?",
     answer:
-      "Uncertain results can happen when the eyes are blocked, blurred, closed, strongly filtered, or captured at a difficult angle.",
+      "Treat it as a baseline. Keep protein stable, set fats at a healthy minimum, and let carbs scale with training demand and appetite.",
   },
   {
-    question: "Why can my result change between photos?",
+    question: "Can I use this for cutting?",
     answer:
-      "Lighting, reflections, head tilt, expression, and camera distance can all change visual cues and affect the estimate.",
-  },
-  {
-    question: "What photos should I upload?",
-    answer:
-      "Use a front-facing portrait where both eyes are open and unobstructed. Avoid heavy shadows, reflective glasses, and extreme head tilt.",
-  },
-  {
-    question: "Can glasses, contacts, or makeup affect results?",
-    answer:
-      "Yes. Glare from glasses and heavy eye makeup can alter landmark visibility. For the most neutral estimate, use minimal reflections and lighter makeup.",
-  },
-  {
-    question: "Can I upload a photo with multiple people?",
-    answer:
-      "No. For best results, use a single-person image with one clearly visible face.",
-  },
-  {
-    question: "Can I use this for medical diagnosis?",
-    answer:
-      "No. This tool is for appearance-based estimation only and is not a medical or diagnostic service.",
-  },
-  {
-    question: "Is my data safe?",
-    answer:
-      "We prioritize privacy and process uploads to generate your scan results. See the Privacy Policy for details on data handling.",
-  },
-  {
-    question: "How should I compare results over time?",
-    answer:
-      "Keep setup consistent: similar lighting, camera distance, head position, and expression across scans.",
+      "This page is tuned for bulking. For cutting, use a calorie deficit calculator and monitor weekly trend changes the same way.",
   },
   {
     question: "I still have a question. How can I contact support?",

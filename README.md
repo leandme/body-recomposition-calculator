@@ -1,12 +1,12 @@
-# Canthal Tilt Test
+# Bulking Calorie Calculator
 
-Canthal Tilt Test is a Next.js app for AI-based eye analysis from portrait photos.
+Bulking Calorie Calculator is a Next.js app that helps users estimate daily calories and macros for a bulking phase.
 
 ## What It Does
 
-- Estimates canthal tilt direction and angle
-- Detects primary eye-shape category
-- Estimates dominant eye color
+- Estimates BMR and maintenance calories
+- Applies a bulking surplus target
+- Provides a daily macro starting point
 
 ## Development
 

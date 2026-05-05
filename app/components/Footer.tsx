@@ -7,17 +7,18 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <img
                 src="/favicon.ico"
-                alt="Canthal Tilt Test Logo"
+                alt="Bulking Calorie Calculator Logo"
                 width={32}
                 height={32}
                 className="w-8 h-8 shrink-0 object-contain"
                 loading="eager"
               />
-              <span className="text-lg font-semibold">Canthal Tilt Test</span>
+              <span className="text-lg font-semibold">Bulking Calorie Calculator</span>
             </div>
           </a>
           <p className="mt-3 text-base text-gray-300 leading-relaxed">
-            AI-powered canthal tilt testing and eye-shape detection from portrait photos.
+            Practical bulking calorie targets and macro starting points based on your stats,
+            activity level, and goal pace.
           </p>
         </div>
 
@@ -39,7 +40,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
         </div>
 
         <div className="my-8 h-px bg-white/10" />
