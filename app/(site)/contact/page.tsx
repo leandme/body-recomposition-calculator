@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
-const title = "Contact Bulking Calorie Calculator";
+const title = "Contact Body Recomposition Calculator";
 const description =
-  "Contact Bulking Calorie Calculator support for help with calorie targets, activity settings, and bulking guidance.";
+  "Contact Body Recomposition Calculator support for help with calorie targets, activity settings, and result interpretation.";
 
 export const metadata: Metadata = {
   title,
@@ -14,8 +14,8 @@ export default function ContactPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-3xl">
       <h1 className="text-4xl font-bold mb-6">Contact</h1>
       <p className="text-lg mb-4">
-        Need help with your bulking setup or daily calorie target? Reach out and we will help you
-        troubleshoot quickly.
+        Need help with your body recomposition setup or daily calorie target? Reach out and we will
+        help you troubleshoot quickly.
       </p>
       <p className="text-lg mb-8">
         Email:{" "}

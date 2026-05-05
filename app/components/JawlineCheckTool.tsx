@@ -1,3 +1,3 @@
-import BulkingCalorieCalculatorTool from "./BulkingCalorieCalculatorTool";
+import BodyRecompositionCalculatorTool from "./BodyRecompositionCalculatorTool";
 
-export default BulkingCalorieCalculatorTool;
+export default BodyRecompositionCalculatorTool;

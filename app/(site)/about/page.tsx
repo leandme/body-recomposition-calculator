@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 const title = "About";
 const description =
-  "Learn what Bulking Calorie Calculator does, how calorie targets are estimated, and how to use results responsibly.";
+  "Learn what Body Recomposition Calculator does, how calorie targets are estimated, and how to use results responsibly.";
 
 export const metadata: Metadata = {
   title,
@@ -17,49 +17,52 @@ export default function AboutPage() {
 
         <div className="prose prose-invert max-w-3xl text-center lg:text-left">
           <p className="text-lg">
-            Bulking Calorie Calculator is a free tool designed to estimate a realistic daily calorie
-            target for muscle gain.
+            Body Recomposition Calculator is a free tool built to help you balance fat loss and
+            muscle gain with practical daily calorie and macro targets.
           </p>
 
           <h2>Why this tool exists</h2>
           <p className="text-lg">
-            Most people bulk either too aggressively or too conservatively. This calculator gives a
-            practical starting point based on your maintenance calories and chosen surplus pace.
+            Most people trying to recomp either cut too aggressively or eat too much to stay lean.
+            This calculator gives you a realistic starting point around maintenance so you can make
+            smaller, smarter adjustments.
           </p>
 
           <h2>How the estimate works (high level)</h2>
           <p className="text-lg">
             The calculator uses your age, sex, height, weight, and activity level to estimate BMR
-            and maintenance calories. It then applies your selected bulking surplus to generate:
+            and maintenance calories. It then applies your selected adjustment to generate:
           </p>
           <ul className="text-lg">
-            <li>Daily bulking calorie target</li>
-            <li>Estimated daily surplus over maintenance</li>
+            <li>Daily recomposition calorie target</li>
+            <li>Estimated daily deficit or surplus vs maintenance</li>
             <li>Suggested starting macro split (protein, carbs, fats)</li>
+          </ul>
+
+          <h2>How to use your results</h2>
+          <ul className="text-lg">
+            <li>Run the target for 2-3 weeks before making major changes</li>
+            <li>Track weekly body-weight trend and training performance together</li>
+            <li>Adjust by about 100-150 kcal if progress stalls or shifts too fast</li>
+            <li>Keep protein intake and resistance training consistent</li>
           </ul>
 
           <h2>Accuracy and limitations</h2>
           <p className="text-lg">
-            This is a planning estimate, not a guarantee. Real-world calorie needs vary by
-            non-exercise activity, training volume, sleep, stress, and tracking consistency.
+            This is a planning estimate, not a guarantee. Real calorie needs vary by non-exercise
+            activity, sleep, stress, training volume, and adherence.
           </p>
           <ul className="text-lg">
-            <li>Use weekly body-weight trends, not single-day scale readings</li>
-            <li>Adjust by 100-150 kcal if gain rate is too fast or too slow</li>
-            <li>Treat this as a starting point, then personalize from data</li>
+            <li>Treat this as a baseline, then personalize from real data</li>
+            <li>Use weekly trends, not single-day scale changes</li>
+            <li>Consult a professional for medical nutrition therapy</li>
           </ul>
 
           <h2>Who should use this tool</h2>
           <ul className="text-lg">
-            <li>Lifters starting a lean or moderate bulk</li>
-            <li>People transitioning from maintenance to a gaining phase</li>
-            <li>Anyone wanting a structured calorie target before meal planning</li>
-          </ul>
-
-          <h2>Who should not rely on this tool alone</h2>
-          <ul className="text-lg">
-            <li>People needing medical nutrition therapy</li>
-            <li>Anyone with a condition requiring clinician-supervised intake planning</li>
+            <li>Lifters aiming to lose fat while preserving or gaining muscle</li>
+            <li>People returning from long cuts or bulks who want a middle-ground strategy</li>
+            <li>Anyone who wants a structured starting target before meal planning</li>
           </ul>
 
           <h2 id="founder">About the Founder</h2>
@@ -111,7 +114,7 @@ export default function AboutPage() {
             <a href="https://jawlinecheck.com" className="text-primary">Jawline Check</a><br />
             <a href="https://heightestimatorai.com" className="text-primary">Height Estimator</a><br />
             <a href="https://bodyshapeanalyzer.com" className="text-primary">Body Shape Visualizer</a><br />
-            <a href="https://bulkingcaloriecalculator.com" className="text-primary">Bulking Calorie Calculator</a><br />
+            <a href="https://bodyrecompositioncalculator.org" className="text-primary">Body Recomposition Calculator</a><br />
             <a href="https://bodyvisualizer.ai" className="text-primary">Body Visualizer</a>
           </p>
 

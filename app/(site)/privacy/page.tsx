@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - Bulking Calorie Calculator",
-  description: "Learn how Bulking Calorie Calculator handles usage data and privacy rights.",
+  title: "Privacy Policy - Body Recomposition Calculator",
+  description: "Learn how Body Recomposition Calculator handles usage data and privacy rights.",
 };
 
 export default function PrivacyPolicy() {
@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
       <p className="text-lg mb-4">
-        Welcome to Bulking Calorie Calculator. Your privacy matters to us. This policy explains
+        Welcome to Body Recomposition Calculator. Your privacy matters to us. This policy explains
         what information we process and how we use it.
       </p>
 

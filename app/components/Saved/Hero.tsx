@@ -10,11 +10,11 @@ export default function Hero() {
         <img
           src="/tools/height-estimator/height-example-1.jpg"
           className="w-64 lg:w-80 rounded-lg shadow-xl"
-          alt="Bulking calorie planning example"
+          alt="Body recomposition planning example"
         />
         <div className="text-center lg:text-left max-w-md">
-          <h1 className="text-4xl font-bold">Bulking Calorie Calculator</h1>
-          <p className="py-6">Set your surplus, see your daily target, and plan your gaining phase.</p>
+          <h1 className="text-4xl font-bold">Body Recomposition Calculator</h1>
+          <p className="py-6">Set your strategy and get daily calories plus macro guidance.</p>
           <UploadDropzone />
         </div>
       </div>

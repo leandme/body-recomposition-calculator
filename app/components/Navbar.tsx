@@ -1,4 +1,4 @@
-const SITE_NAME = "Bulking Calorie Calculator";
+const SITE_NAME = "Body Recomposition Calculator";
 const LOGO_SRC = "/favicon.ico";
 
 export default function Navbar() {
@@ -9,7 +9,7 @@ export default function Navbar() {
           className="btn btn-ghost font-heading text-xl flex items-center gap-2 hover:bg-transparent focus:bg-transparent active:bg-transparent"
           href="/"
         >
-          <img src={LOGO_SRC} alt="Bulking Calorie Calculator Logo" className="w-6 h-6" />
+          <img src={LOGO_SRC} alt="Body Recomposition Calculator Logo" className="w-6 h-6" />
           {SITE_NAME}
         </a>
       </div>

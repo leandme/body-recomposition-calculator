@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Sitemap - Bulking Calorie Calculator",
-  description: "HTML sitemap for Bulking Calorie Calculator.",
+  title: "Sitemap - Body Recomposition Calculator",
+  description: "HTML sitemap for Body Recomposition Calculator.",
 };
 
 const links = [

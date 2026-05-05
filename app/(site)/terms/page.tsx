@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions - Bulking Calorie Calculator",
-  description: "Terms governing use of Bulking Calorie Calculator and its calorie-planning features.",
+  title: "Terms & Conditions - Body Recomposition Calculator",
+  description: "Terms governing use of Body Recomposition Calculator and its nutrition-planning features.",
 };
 
 export default function TermsPage() {
@@ -10,16 +10,16 @@ export default function TermsPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-6">Terms &amp; Conditions</h1>
       <p className="mb-4 text-lg">
-        These Terms govern your use of Bulking Calorie Calculator. By using this service, you agree
-        to these terms.
+        These Terms govern your use of Body Recomposition Calculator. By using this service, you
+        agree to these terms.
       </p>
 
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">1. Service Scope</h2>
         <p>
-          Bulking Calorie Calculator provides nutrition-planning estimates, including maintenance
-          calories, bulking calorie targets, and macro starting points. Results are informational
-          only and are not medical advice.
+          Body Recomposition Calculator provides nutrition-planning estimates, including
+          maintenance calories, calorie adjustments around maintenance, and macro starting points.
+          Results are informational only and are not medical advice.
         </p>
       </section>
 
@@ -35,8 +35,8 @@ export default function TermsPage() {
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">3. No Medical Use</h2>
         <p>
-          Bulking Calorie Calculator is not a medical, diagnostic, or treatment tool. Do not rely on
-          it as a substitute for professional clinical evaluation.
+          Body Recomposition Calculator is not a medical, diagnostic, or treatment tool. Do not
+          rely on it as a substitute for professional clinical evaluation.
         </p>
       </section>
 
@@ -44,8 +44,8 @@ export default function TermsPage() {
         <h2 className="text-2xl font-semibold mb-4">4. Disclaimer and Liability</h2>
         <p>
           The service is provided &quot;as is&quot; without warranties of any kind. We do not guarantee
-          uninterrupted availability or perfect accuracy. To the maximum extent permitted by law, we
-          are not liable for damages arising from use of the service.
+          uninterrupted availability or perfect accuracy. To the maximum extent permitted by law,
+          we are not liable for damages arising from use of the service.
         </p>
       </section>
 

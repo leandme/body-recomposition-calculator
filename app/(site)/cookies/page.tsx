@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy - Bulking Calorie Calculator",
-  description: "Cookie and similar technology usage for Bulking Calorie Calculator.",
+  title: "Cookie Policy - Body Recomposition Calculator",
+  description: "Cookie and similar technology usage for Body Recomposition Calculator.",
 };
 
 export default function CookiesPage() {
@@ -10,7 +10,7 @@ export default function CookiesPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-6">Cookie Policy</h1>
       <p className="text-lg mb-4">
-        This page describes how Bulking Calorie Calculator may use cookies and similar
+        This page describes how Body Recomposition Calculator may use cookies and similar
         technologies.
       </p>
 

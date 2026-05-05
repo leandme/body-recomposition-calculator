@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Subprocessors - Bulking Calorie Calculator",
-  description: "Third-party service providers that may process data for Bulking Calorie Calculator.",
+  title: "Subprocessors - Body Recomposition Calculator",
+  description: "Third-party service providers that may process data for Body Recomposition Calculator.",
 };
 
 export default function SubprocessorsPage() {
@@ -10,7 +10,7 @@ export default function SubprocessorsPage() {
     <div className="container mx-auto px-4 py-8 lg:px-8 lg:py-16 max-w-4xl">
       <h1 className="text-4xl font-bold mb-6">Subprocessors</h1>
       <p className="text-lg mb-6">
-        Bulking Calorie Calculator may rely on third-party infrastructure and service providers to
+        Body Recomposition Calculator may rely on third-party infrastructure and service providers to
         operate securely and reliably.
       </p>
 

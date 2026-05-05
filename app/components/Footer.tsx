@@ -7,18 +7,18 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <img
                 src="/favicon.ico"
-                alt="Bulking Calorie Calculator Logo"
+                alt="Body Recomposition Calculator Logo"
                 width={32}
                 height={32}
                 className="w-8 h-8 shrink-0 object-contain"
                 loading="eager"
               />
-              <span className="text-lg font-semibold">Bulking Calorie Calculator</span>
+              <span className="text-lg font-semibold">Body Recomposition Calculator</span>
             </div>
           </a>
           <p className="mt-3 text-base text-gray-300 leading-relaxed">
-            Practical bulking calorie targets and macro starting points based on your stats,
-            activity level, and goal pace.
+            Practical calorie and macro targets to support fat loss and muscle gain at the same
+            time.
           </p>
         </div>
 

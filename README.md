@@ -1,11 +1,11 @@
-# Bulking Calorie Calculator
+# Body Recomposition Calculator
 
-Bulking Calorie Calculator is a Next.js app that helps users estimate daily calories and macros for a bulking phase.
+Body Recomposition Calculator is a Next.js app that helps users estimate daily calories and macros for body recomposition.
 
 ## What It Does
 
 - Estimates BMR and maintenance calories
-- Applies a bulking surplus target
+- Applies a recomposition calorie adjustment (deficit, maintenance, or small surplus)
 - Provides a daily macro starting point
 
 ## Development

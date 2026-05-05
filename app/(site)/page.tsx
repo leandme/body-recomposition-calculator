@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
-import BulkingCalorieCalculatorTool from "../components/BulkingCalorieCalculatorTool";
+import BodyRecompositionCalculatorTool from "../components/BodyRecompositionCalculatorTool";
 
-const title = "Bulking Calorie Calculator";
+const title = "Body Recomposition Calculator";
 const description =
-  "Estimate your bulking calories using BMR, activity level, and surplus target, with macro guidance for lean or aggressive gaining phases.";
+  "Estimate maintenance calories, choose a small deficit or surplus, and get macro targets for a practical body recomposition plan.";
 
 export const metadata: Metadata = {
   title,
@@ -20,7 +20,7 @@ export default function Home() {
         </div>
       }
     >
-      <BulkingCalorieCalculatorTool />
+      <BodyRecompositionCalculatorTool />
     </Suspense>
   );
 }

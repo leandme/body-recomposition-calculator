@@ -5,10 +5,10 @@ export default function Hero() {
     <div className="hero min-h-screen lg:-mt-28 flex items-center justify-center">
       <div className="hero-content text-center">
         <div className="max-w-2xl">
-          <h1 className="text-4xl lg:text-5xl font-bold">Bulking Calorie Calculator</h1>
+          <h1 className="text-4xl lg:text-5xl font-bold">Body Recomposition Calculator</h1>
           <p className="py-6 text-lg mt-6">
-            Estimate your daily bulking calories and macro targets using your body stats and
-            activity level.
+            Estimate maintenance calories, pick your recomposition strategy, and get daily macro
+            targets.
           </p>
           <a href="/">
             <button className="btn btn-primary btn-lg text-white mt-6">
